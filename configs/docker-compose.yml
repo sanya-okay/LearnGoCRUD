@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:13.3-alpine
+    restart: "no"
+    networks:
+      - dc-loc
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: db-user
+      POSTGRES_PASSWORD: db-pass
+      POSTGRES_DB: db-name
+    ports:
+      - "5432:5432"
+
+networks:
+  dc-loc:
