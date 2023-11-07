@@ -1,4 +1,4 @@
-module LearnGoPersonGinPsql
+module LearnGoCRUD
 
 go 1.19
 

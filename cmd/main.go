@@ -1,9 +1,10 @@
 package main
 
 import (
-	"LearnGoPersonGinPsql/internal/database"
-	"LearnGoPersonGinPsql/internal/service"
-	"LearnGoPersonGinPsql/internal/transport"
+	"LearnGoCRUD/internal/database"
+	"LearnGoCRUD/internal/models"
+	"LearnGoCRUD/internal/service"
+	"LearnGoCRUD/internal/transport"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 	"log"
@@ -13,16 +14,20 @@ import (
 
 func main() {
 
-	connStr := "user=db-user password=db-pass dbname=db-name sslmode=disable"
-	db, err := sqlx.Open("postgres", connStr)
+	db, err := sqlx.Open("postgres", models.ConnStr) //установка соединения с бд
 	if err != nil {
-		log.Fatalf("db error:%s\n", err)
+		log.Fatalf("db error sqlx.Open:%s\n", err)
 	}
-	defer func(db *sqlx.DB) {
+	defer func(db *sqlx.DB) { //закрытие соединения с бд
 		err := db.Close()
 		if err != nil {
 		}
 	}(db)
+
+	_, err = db.Exec(models.CreateTableQuery) //создает таблицу, если ее не было
+	if err != nil {
+		log.Fatalf("db error createTableQuery:%s\n", err)
+	}
 
 	//initializing dependencies (инициализация зависимостей)
 	pDB := database.NewDB(db)

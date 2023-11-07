@@ -1,7 +1,7 @@
 package service
 
 import (
-	"LearnGoPersonGinPsql/internal/models"
+	"LearnGoCRUD/internal/models"
 	"fmt"
 	"math/rand"
 )

@@ -1,7 +1,7 @@
 package database
 
 import (
-	"LearnGoPersonGinPsql/internal/models"
+	"LearnGoCRUD/internal/models"
 	"fmt"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"

@@ -1,7 +1,7 @@
 package transport
 
 import (
-	"LearnGoPersonGinPsql/internal/models"
+	"LearnGoCRUD/internal/models"
 	"encoding/json"
 	"github.com/gorilla/mux"
 	"io"
