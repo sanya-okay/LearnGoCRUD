@@ -67,7 +67,7 @@ func (h *Handler) createPerson(w http.ResponseWriter, r *http.Request /*запр
 	w.WriteHeader(http.StatusCreated)
 }
 
-func (h *Handler) getAllPersons(w http.ResponseWriter, r *http.Request /*запрос*/) {
+func (h *Handler) getAllPersons(w http.ResponseWriter, r *http.Request /*запрос*/) { //Todo: Unused parameter 'r': r *http.Request
 	persons, err := h.ServicePerson.GetAllPersons()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

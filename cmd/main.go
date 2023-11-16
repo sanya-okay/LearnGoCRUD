@@ -2,7 +2,6 @@ package main
 
 import (
 	"LearnGoCRUD/internal/database"
-	"LearnGoCRUD/internal/models"
 	"LearnGoCRUD/internal/service"
 	"LearnGoCRUD/internal/transport"
 	"github.com/jmoiron/sqlx"
@@ -14,7 +13,15 @@ import (
 
 func main() {
 
-	db, err := sqlx.Open("postgres", models.ConnStr) //установка соединения с бд
+	createTableQuery := `CREATE TABLE IF NOT EXISTS Person(
+                                     id SERIAL NOT NULL PRIMARY KEY,
+                                     name TEXT NOT NULL,
+                                     age INTEGER NOT NULL,
+                                     license BOOL NOT NULL
+);`
+	connStr := "user=db-user password=db-pass dbname=db-name sslmode=disable"
+
+	db, err := sqlx.Open("postgres", connStr) //установка соединения с бд
 	if err != nil {
 		log.Fatalf("db error sqlx.Open:%s\n", err)
 	}
@@ -24,7 +31,7 @@ func main() {
 		}
 	}(db)
 
-	_, err = db.Exec(models.CreateTableQuery) //создает таблицу, если ее не было
+	_, err = db.Exec(createTableQuery) //создает таблицу, если ее не было
 	if err != nil {
 		log.Fatalf("db error createTableQuery:%s\n", err)
 	}
